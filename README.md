@@ -48,6 +48,20 @@ timer.create(100, { immediate: true }).on('elapsed', function () {
 });
 ```
 
+### Controlling timers
+
+You can stop a running timer at an arbitrary point in time. For that you need to call its `stop` function.
+
+```javascript
+t.stop();
+```
+
+To restart a stopped timer call its `start` function accordingly.
+
+```javascript
+t.start();
+```
+
 ## Running the tests
 
 timer has been developed using TDD. To run the tests, go to the folder where you have installed timer to and run `npm test`. You need to have [mocha](https://github.com/visionmedia/mocha) installed.

@@ -28,4 +28,68 @@ suite('timer', function () {
       }, 550);
     });
   });
+
+  suite('start', function () {
+    test('starts a stopped timer.', function (done) {
+      var counter = 0;
+      var t = timer.create(100);
+      t.on('elapsed', function () {
+        counter++;
+      });
+      t.stop();
+      t.start();
+      setTimeout(function () {
+        assert.that(counter, is.equalTo(5));
+        done();
+      }, 550);
+    });
+
+    test('ignores multiple calls.', function (done) {
+      var counter = 0;
+      var t = timer.create(100);
+      t.on('elapsed', function () {
+        counter++;
+      });
+      t.stop();
+      t.start();
+      t.start();
+      setTimeout(function () {
+        assert.that(counter, is.equalTo(5));
+        done();
+      }, 550);
+    });
+  });
+
+  suite('stop', function () {
+    test('stops a running timer.', function (done) {
+      var counter = 0;
+      var t = timer.create(100);
+      t.on('elapsed', function () {
+        counter++;
+      });
+      setTimeout(function () {
+        t.stop();
+        setTimeout(function () {
+          assert.that(counter, is.equalTo(1));
+          done();
+        }, 500);
+      }, 150);
+    });
+
+    test('ignores multiple calls.', function (done) {
+      var counter = 0;
+      var t = timer.create(100);
+      t.on('elapsed', function () {
+        counter++;
+      });
+      setTimeout(function () {
+        t.stop();
+        t.stop();
+        setTimeout(function () {
+          assert.that(counter, is.equalTo(1));
+          done();
+        }, 500);
+      }, 150);
+    });
+  });
 });
