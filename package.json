@@ -5,6 +5,7 @@
   "author": "Golo Roden <golo.roden@thenativeweb.io> (http://www.thenativeweb.io)",
   "main": "lib/timer.js",
   "dependencies": {
+    "underscore": "1.4.3"
   },
   "devDependencies": {
     "node-assertthat": "0.0.13"
