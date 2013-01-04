@@ -1,0 +1,19 @@
+{
+  "name": "timer",
+  "version": "0.0.1",
+  "description": "timer is an evented time base.",
+  "author": "Golo Roden <golo.roden@thenativeweb.io> (http://www.thenativeweb.io)",
+  "main": "lib/timer.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "node-assertthat": "0.0.13"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thenativeweb/timer.git"
+  }
+}
