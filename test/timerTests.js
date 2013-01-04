@@ -7,9 +7,8 @@ var timer = require('../lib/timer');
 suite('timer', function () {
   suite('create', function () {
     test('returns a timer that emits periodically.', function (done) {
-      var t = timer.create(100),
-          counter = 0;
-      t.on('elapsed', function () {
+      var counter = 0;
+      timer.create(100).on('elapsed', function () {
         counter++;
       });
       setTimeout(function () {
@@ -19,9 +18,8 @@ suite('timer', function () {
     });
 
     test('returns a timer that emits immediately if specified.', function (done) {
-      var t = timer.create(100, { immediate: true }),
-          counter = 0;
-      t.on('elapsed', function () {
+      var counter = 0;
+      timer.create(100, { immediate: true }).on('elapsed', function () {
         counter++;
       });
       setTimeout(function () {
