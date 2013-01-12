@@ -30,6 +30,8 @@ If you want to start a timer immediately you need to provide an `options` object
 var t = timer.create(100, { immediate: true });
 ```
 
+*Note: If you create a timer with zero timeout, you will get a timer that does nothing, even if you manually call its `start` function. If you provide a negative timeout, `create` will throw an error.*
+
 ### Handling ticks
 
 Whenever the timer ticks it emits an `elapsed` event. You can bind to that event using the timer's `on` function to handle it.

@@ -27,6 +27,34 @@ suite('timer', function () {
         done();
       }, 550);
     });
+
+    test('returns a timer that does not emit if the specified time is equal to 0.', function (done) {
+      var counter = 0;
+      timer.create(0).on('elapsed', function () {
+        counter++;
+      });
+      setTimeout(function () {
+        assert.that(counter, is.equalTo(0));
+        done();
+      }, 500);
+    });
+
+    test('returns a timer that does not emit if the specified time is equal to 0 even if immediate is set to true.', function (done) {
+      var counter = 0;
+      timer.create(0, { immediate: true }).on('elapsed', function () {
+        counter++;
+      });
+      setTimeout(function () {
+        assert.that(counter, is.equalTo(0));
+        done();
+      }, 500);
+    });
+
+    test('throws an error if the specified time is less than 0.', function () {
+      assert.that(function () {
+        timer.create(-1)
+      }, is.throwing());
+    });
   });
 
   suite('start', function () {
@@ -57,6 +85,19 @@ suite('timer', function () {
         assert.that(counter, is.equalTo(5));
         done();
       }, 550);
+    });
+
+    test('does nothing on a timer with timeout equal to 0.', function (done) {
+      var counter = 0;
+      var t = timer.create(0);
+      t.on('elapsed', function () {
+        counter++;
+      });
+      t.start();
+      setTimeout(function () {
+        assert.that(counter, is.equalTo(0));
+        done();
+      }, 500);
     });
   });
 
@@ -90,6 +131,19 @@ suite('timer', function () {
           done();
         }, 500);
       }, 150);
+    });
+
+    test('does nothing on a timer with timeout equal to 0.', function (done) {
+      var counter = 0;
+      var t = timer.create(0);
+      t.on('elapsed', function () {
+        counter++;
+      });
+      t.stop();
+      setTimeout(function () {
+        assert.that(counter, is.equalTo(0));
+        done();
+      }, 500);
     });
   });
 });
