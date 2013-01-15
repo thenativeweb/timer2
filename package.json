@@ -4,6 +4,7 @@
   "description": "timer is an evented time base.",
   "author": "Golo Roden <golo.roden@thenativeweb.io> (http://www.thenativeweb.io)",
   "main": "lib/timer.js",
+  "private": "true",
   "dependencies": {
     "underscore": "1.4.3"
   },
