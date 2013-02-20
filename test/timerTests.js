@@ -52,7 +52,7 @@ suite('timer', function () {
 
     test('throws an error if the specified time is less than 0.', function () {
       assert.that(function () {
-        timer.create(-1)
+        timer.create(-1);
       }, is.throwing());
     });
   });
