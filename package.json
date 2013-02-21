@@ -6,6 +6,7 @@
   "main": "lib/timer.js",
   "private": "true",
   "dependencies": {
+    "evented": "git+ssh://git@github.com:thenativeweb/evented.git",
     "underscore": "1.4.3"
   },
   "devDependencies": {
