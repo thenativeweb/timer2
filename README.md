@@ -32,6 +32,14 @@ var t = timer.create(100, { immediate: true });
 
 *Note: If you create a timer with zero timeout, you will get a timer that does nothing, even if you manually call its `start` function. If you provide a negative timeout, `create` will throw an error.*
 
+### Creating randomized timers
+
+Alternatively, you can specify a `variation` for the `timeout`. This means, e.g. that if you specify a timeout of 2000 ms and a variation of 500 ms, you will get random ticks between 1500 ms and 2500 ms.
+
+```javascript
+var t = timer.create(2000, { variation: 500 });
+```
+
 ### Handling ticks
 
 Whenever the timer ticks it emits an `elapsed` event. You can bind to that event using the timer's `on` function to handle it.
