@@ -58,6 +58,8 @@ timer.create(100, { immediate: true }).on('elapsed', function () {
 });
 ```
 
+*Note: You must unbind any callbacks that were registered using `on` if you don't need the timer any longer. As a timer is nothing but an instance of [EventEmitter2](https://github.com/hij1nx/EventEmitter2), you can use all of its functions, `off` and `removeAllListeners`.*
+
 ### Controlling timers
 
 You can stop a running timer at an arbitrary point in time. For that you need to call its `stop` function.
