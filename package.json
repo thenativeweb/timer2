@@ -1,6 +1,6 @@
 {
   "name": "timer",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "timer is an evented time base.",
   "contributors": [
     {
