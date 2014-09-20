@@ -2,148 +2,151 @@
 
 var assert = require('node-assertthat');
 
-var timer = require('../lib/timer');
+var Timer = require('../lib/Timer');
 
-suite('timer', function () {
-  suite('create', function () {
-    test('returns a timer that emits periodically.', function (done) {
-      var counter = 0;
-      timer.create(100).on('elapsed', function () {
-        counter++;
-      });
-      setTimeout(function () {
-        assert.that(counter, is.equalTo(5));
-        done();
-      }, 550);
+suite('Timer', function () {
+  test('is a function.', function (done) {
+    assert.that(Timer, is.ofType('function'));
+    done();
+  });
+
+  test('throws an error if timeout is missing.', function (done) {
+    assert.that(function () {
+      /*eslint-disable no-new*/
+      new Timer();
+      /*eslint-enable no-new*/
+    }, is.throwing('undefined is not: number'));
+    done();
+  });
+
+  test('returns an event emitter.', function (done) {
+    var timer = new Timer(100);
+    assert.that(timer, is.ofType('object'));
+    assert.that(timer.on, is.ofType('function'));
+    assert.that(timer.once, is.ofType('function'));
+    assert.that(timer.removeListener, is.ofType('function'));
+    done();
+  });
+
+  test('emits a \'tick\' event periodically.', function (done) {
+    var timer = new Timer(100);
+
+    var counter = 0;
+    timer.on('tick', function () {
+      counter++;
     });
 
-    test('returns a timer that emits immediately if specified.', function (done) {
-      var counter = 0;
-      timer.create(100, { immediate: true }).on('elapsed', function () {
-        counter++;
-      });
-      setTimeout(function () {
-        assert.that(counter, is.equalTo(6));
-        done();
-      }, 550);
+    setTimeout(function () {
+      assert.that(counter, is.equalTo(5));
+      done();
+    }, 550);
+  });
+
+  test('emits a \'tick\' event periodically with variations.', function (done) {
+    var timer = new Timer(100, {
+      variation: 50
     });
 
-    test('returns a timer that does not emit if the specified time is equal to 0.', function (done) {
+    var counter = 0;
+    timer.on('tick', function () {
+      counter++;
+    });
+
+    setTimeout(function () {
+      assert.that(counter, is.between(3, 10));
+      done();
+    }, 550);
+  });
+
+  test('emits a \'tick\' event immediately if requested.', function (done) {
+    var timer = new Timer(100, {
+      immediate: true
+    });
+
+    var counter = 0;
+    timer.on('tick', function () {
+      counter++;
+    });
+
+    setTimeout(function () {
+      assert.that(counter, is.equalTo(1));
+      done();
+    }, 50);
+  });
+
+  suite('stop', function () {
+    test('is a function.', function (done) {
+      var timer = new Timer(100);
+      assert.that(timer.stop, is.ofType('function'));
+      done();
+    });
+
+    test('stops a running timer.', function (done) {
+      var timer = new Timer(100);
+
       var counter = 0;
-      timer.create(0).on('elapsed', function () {
+      timer.on('tick', function () {
         counter++;
       });
+
+      timer.stop();
+
       setTimeout(function () {
         assert.that(counter, is.equalTo(0));
         done();
-      }, 500);
+      }, 150);
     });
 
-    test('returns a timer that does not emit if the specified time is equal to 0 even if immediate is set to true.', function (done) {
-      var counter = 0;
-      timer.create(0, { immediate: true }).on('elapsed', function () {
-        counter++;
-      });
-      setTimeout(function () {
-        assert.that(counter, is.equalTo(0));
-        done();
-      }, 500);
-    });
+    test('ignores multiple calls.', function (done) {
+      var timer = new Timer(100);
 
-    test('throws an error if the specified time is less than 0.', function () {
-      assert.that(function () {
-        timer.create(-1);
-      }, is.throwing());
+      timer.stop();
+      timer.stop();
+
+      done();
     });
   });
 
   suite('start', function () {
+    test('is a function.', function (done) {
+      var timer = new Timer(100);
+      assert.that(timer.start, is.ofType('function'));
+      done();
+    });
+
     test('starts a stopped timer.', function (done) {
-      var counter = 0;
-      var t = timer.create(100);
-      t.on('elapsed', function () {
-        counter++;
-      });
-      t.stop();
-      t.start();
-      setTimeout(function () {
-        assert.that(counter, is.equalTo(5));
-        done();
-      }, 550);
-    });
+      var timer = new Timer(100);
 
-    test('ignores multiple calls.', function (done) {
       var counter = 0;
-      var t = timer.create(100);
-      t.on('elapsed', function () {
+      timer.on('tick', function () {
         counter++;
       });
-      t.stop();
-      t.start();
-      t.start();
-      setTimeout(function () {
-        assert.that(counter, is.equalTo(5));
-        done();
-      }, 550);
-    });
 
-    test('does nothing on a timer with timeout equal to 0.', function (done) {
-      var counter = 0;
-      var t = timer.create(0);
-      t.on('elapsed', function () {
-        counter++;
-      });
-      t.start();
-      setTimeout(function () {
-        assert.that(counter, is.equalTo(0));
-        done();
-      }, 500);
-    });
-  });
+      timer.stop();
+      timer.start();
 
-  suite('stop', function () {
-    test('stops a running timer.', function (done) {
-      var counter = 0;
-      var t = timer.create(100);
-      t.on('elapsed', function () {
-        counter++;
-      });
       setTimeout(function () {
-        t.stop();
-        setTimeout(function () {
-          assert.that(counter, is.equalTo(1));
-          done();
-        }, 500);
+        assert.that(counter, is.equalTo(1));
+        done();
       }, 150);
     });
 
     test('ignores multiple calls.', function (done) {
-      var counter = 0;
-      var t = timer.create(100);
-      t.on('elapsed', function () {
-        counter++;
-      });
-      setTimeout(function () {
-        t.stop();
-        t.stop();
-        setTimeout(function () {
-          assert.that(counter, is.equalTo(1));
-          done();
-        }, 500);
-      }, 150);
-    });
+      var timer = new Timer(100);
 
-    test('does nothing on a timer with timeout equal to 0.', function (done) {
       var counter = 0;
-      var t = timer.create(0);
-      t.on('elapsed', function () {
+      timer.on('tick', function () {
         counter++;
       });
-      t.stop();
+
+      timer.stop();
+      timer.start();
+      timer.start();
+
       setTimeout(function () {
-        assert.that(counter, is.equalTo(0));
+        assert.that(counter, is.equalTo(1));
         done();
-      }, 500);
+      }, 150);
     });
   });
 });

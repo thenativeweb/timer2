@@ -1,7 +1,7 @@
 {
-  "name": "timer",
+  "name": "timer2",
   "version": "0.1.0",
-  "description": "timer is an evented time base.",
+  "description": "timer2 is an evented timer.",
   "contributors": [
     {
       "name": "Golo Roden",
@@ -12,20 +12,19 @@
       "email": "matthias.wagler@thenativeweb.io"
     }
   ],
-  "main": "lib/timer.js",
-  "private": "true",
+  "main": "lib/Timer.js",
   "dependencies": {
-    "eventemitter2": "0.4.13",
-    "underscore": "1.6.0"
+    "eventemitter2": "0.4.14",
+    "node-ensurethat": "0.1.5"
   },
   "devDependencies": {
     "grunt": "0.4.5",
     "node-assertthat": "0.2.0",
-    "tourism": "0.1.0"
+    "tourism": "0.7.3"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/thenativeweb/timer.git"
+    "url": "git://github.com/thenativeweb/timer2.git"
   },
   "license": "MIT"
 }

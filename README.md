@@ -1,10 +1,10 @@
-# timer
+# timer2
 
-timer is an evented time base.
+timer2 is an evented timer.
 
 ## Installation
 
-At the moment, installation of this module must be made manually.
+    $ npm install timer2
 
 ## Quick start
 
