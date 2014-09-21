@@ -149,4 +149,49 @@ suite('Timer', function () {
       }, 150);
     });
   });
+
+  suite('destroy', function () {
+    test('is a function.', function (done) {
+      var timer = new Timer(100);
+      assert.that(timer.destroy, is.ofType('function'));
+      done();
+    });
+
+    test('stops a running timer.', function (done) {
+      var timer = new Timer(100);
+
+      var counter = 0;
+      timer.on('tick', function () {
+        counter++;
+      });
+
+      timer.destroy();
+
+      timer.on('tick', function () {
+        counter++;
+      });
+
+      setTimeout(function () {
+        assert.that(counter, is.equalTo(0));
+        done();
+      }, 150);
+    });
+
+    test('removes all event listeners.', function (done) {
+      var timer = new Timer(100);
+
+      var counter = 0;
+      timer.on('tick', function () {
+        counter++;
+      });
+
+      timer.destroy();
+      timer.start();
+
+      setTimeout(function () {
+        assert.that(counter, is.equalTo(0));
+        done();
+      }, 150);
+    });
+  });
 });

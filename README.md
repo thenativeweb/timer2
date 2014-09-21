@@ -66,6 +66,21 @@ To restart a stopped timer call its `start` function accordingly.
 timer.start();
 ```
 
+### Destroying timers
+
+If you don't longer need a timer you have to stop it and remove all subscribers.
+
+```javascript
+timer.stop();
+timer.removeAllListeners();
+```
+
+Alternatively, you may use the convenience function `destroy` that does all the necessary things for you.
+
+```javascript
+timer.destroy();
+```
+
 ## Running the build
 
 This module can be built using [Grunt](http://gruntjs.com/). Besides running the tests, this also analyses the code. To run Grunt, go to the folder where you have installed timer2 and run `grunt`. You need to have [grunt-cli](https://github.com/gruntjs/grunt-cli) installed.

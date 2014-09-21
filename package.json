@@ -14,7 +14,6 @@
   ],
   "main": "lib/Timer.js",
   "dependencies": {
-    "eventemitter2": "0.4.14",
     "node-ensurethat": "0.1.5"
   },
   "devDependencies": {
