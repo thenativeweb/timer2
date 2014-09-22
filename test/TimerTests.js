@@ -25,6 +25,7 @@ suite('Timer', function () {
     assert.that(timer.on, is.ofType('function'));
     assert.that(timer.once, is.ofType('function'));
     assert.that(timer.removeListener, is.ofType('function'));
+    timer.destroy();
     done();
   });
 
@@ -38,6 +39,7 @@ suite('Timer', function () {
 
     setTimeout(function () {
       assert.that(counter, is.equalTo(5));
+      timer.destroy();
       done();
     }, 550);
   });
@@ -54,6 +56,7 @@ suite('Timer', function () {
 
     setTimeout(function () {
       assert.that(counter, is.between(3, 10));
+      timer.destroy();
       done();
     }, 550);
   });
@@ -70,6 +73,7 @@ suite('Timer', function () {
 
     setTimeout(function () {
       assert.that(counter, is.equalTo(1));
+      timer.destroy();
       done();
     }, 50);
   });
@@ -78,6 +82,7 @@ suite('Timer', function () {
     test('is a function.', function (done) {
       var timer = new Timer(100);
       assert.that(timer.stop, is.ofType('function'));
+      timer.destroy();
       done();
     });
 
@@ -93,6 +98,7 @@ suite('Timer', function () {
 
       setTimeout(function () {
         assert.that(counter, is.equalTo(0));
+        timer.destroy();
         done();
       }, 150);
     });
@@ -103,6 +109,7 @@ suite('Timer', function () {
       timer.stop();
       timer.stop();
 
+      timer.destroy();
       done();
     });
   });
@@ -111,6 +118,7 @@ suite('Timer', function () {
     test('is a function.', function (done) {
       var timer = new Timer(100);
       assert.that(timer.start, is.ofType('function'));
+      timer.destroy();
       done();
     });
 
@@ -127,6 +135,7 @@ suite('Timer', function () {
 
       setTimeout(function () {
         assert.that(counter, is.equalTo(1));
+        timer.destroy();
         done();
       }, 150);
     });
@@ -145,6 +154,7 @@ suite('Timer', function () {
 
       setTimeout(function () {
         assert.that(counter, is.equalTo(1));
+        timer.destroy();
         done();
       }, 150);
     });
@@ -154,6 +164,7 @@ suite('Timer', function () {
     test('is a function.', function (done) {
       var timer = new Timer(100);
       assert.that(timer.destroy, is.ofType('function'));
+      timer.destroy();
       done();
     });
 
@@ -173,6 +184,7 @@ suite('Timer', function () {
 
       setTimeout(function () {
         assert.that(counter, is.equalTo(0));
+        timer.destroy();
         done();
       }, 150);
     });
@@ -190,6 +202,7 @@ suite('Timer', function () {
 
       setTimeout(function () {
         assert.that(counter, is.equalTo(0));
+        timer.destroy();
         done();
       }, 150);
     });
