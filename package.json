@@ -25,5 +25,9 @@
     "type": "git",
     "url": "git://github.com/thenativeweb/timer2.git"
   },
+  "keywords": [
+    "interval",
+    "timer"
+  ],
   "license": "MIT"
 }
