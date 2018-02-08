@@ -10,16 +10,18 @@
     {
       "name": "Matthias Wagler",
       "email": "matthias.wagler@thenativeweb.io"
+    },
+    {
+      "name": "Jan-Hendrik Grundhöfer",
+      "email": "jan-hendrik.grundhoefer@thenativeweb.io"
     }
   ],
-  "main": "lib/Timer.js",
-  "dependencies": {
-    "ensurethat": "0.2.2"
-  },
+  "main": "dist/Timer.js",
+  "dependencies": {},
   "devDependencies": {
-    "assertthat": "0.6.0",
-    "grunt": "0.4.5",
-    "tourism": "0.16.1"
+    "assertthat": "1.0.0",
+    "roboter": "0.15.6",
+    "roboter-server": "0.15.6"
   },
   "repository": {
     "type": "git",

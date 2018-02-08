@@ -4,26 +4,28 @@ timer2 is an evented timer.
 
 ## Installation
 
-    $ npm install timer2
+```shell
+$ npm install timer2
+```
 
 ## Quick start
 
 First you need to add a reference to timer2 to your application.
 
 ```javascript
-var Timer = require('timer2');
+const Timer = require('timer2');
 ```
 
 Then you are able to create new timers by calling the `Timer` constructor with the desired timeout in milliseconds.
 
 ```javascript
-var timer = new Timer(100);
+const timer = new Timer(100);
 ```
 
 The timer then periodically emits `tick` events. You can subscribe to these events using the usual `EventEmitter` functions, such as `on` and `once`.
 
 ```javascript
-timer.on('tick', function () {
+timer.on('tick', () => {
   // ...
 });
 ```
@@ -35,7 +37,7 @@ Please remember that you need to unsubscribe from the `tick` event if you do not
 By default, timers do not start immediately, but wait for the specified number of milliseconds before emitting the first `tick` event. If you need a timer that starts immediately, provide an `options` object to the constructor and set its `immediate` property to `true`.
 
 ```javascript
-var timer = new Timer(100, {
+const timer = new Timer(100, {
   immediate: true
 });
 ```
@@ -47,7 +49,7 @@ Normally, the timer ticks at a constant rate. If you want to make ticking a litt
 To enable wobbling, provide a `variation` property within the `options` object and set its value to the desired number of milliseconds.
 
 ```javascript
-var timer = new Timer(2000, {
+const timer = new Timer(2000, {
   variation: 500
 });
 ```
@@ -83,14 +85,16 @@ timer.destroy();
 
 ## Running the build
 
-This module can be built using [Grunt](http://gruntjs.com/). Besides running the tests, this also analyses the code. To run Grunt, go to the folder where you have installed timer2 and run `grunt`. You need to have [grunt-cli](https://github.com/gruntjs/grunt-cli) installed.
+To build this module use [roboter](https://www.npmjs.com/package/roboter).
 
-    $ grunt
+```shell
+$ bot
+```
 
 ## License
 
 The MIT License (MIT)
-Copyright (c) 2013-2014 the native web.
+Copyright (c) 2013-2018 the native web.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
