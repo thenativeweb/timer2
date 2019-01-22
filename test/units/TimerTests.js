@@ -2,7 +2,7 @@
 
 const assert = require('assertthat');
 
-const Timer = require('../../lib/Timer');
+const Timer = require('../../src/Timer');
 
 suite('Timer', () => {
   test('is a function.', done => {

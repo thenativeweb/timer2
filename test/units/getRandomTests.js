@@ -2,7 +2,7 @@
 
 const assert = require('assertthat');
 
-const getRandom = require('../../lib/getRandom');
+const getRandom = require('../../src/getRandom');
 
 suite('getRandom', () => {
   test('is a function.', done => {
