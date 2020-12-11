@@ -24,6 +24,7 @@ class Timer extends EventEmitter {
 
     if (this.immediate) {
       this.tick();
+      this.isRunning = true; // prevent timer tick twice, fixed issues #4
     }
 
     this.start();
